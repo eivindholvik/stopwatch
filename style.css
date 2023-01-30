@@ -1,0 +1,68 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100%;
+  width: 100%;
+}
+
+.stop_watch {
+  font-family: "Courier New", Courier, monospace;
+  --size: 8rem;
+  display: block;
+  margin-inline: auto;
+  margin-block: calc(var(--size) * 0.2);
+  width: 70%;
+  min-width: calc(var(--size) * 8);
+  background-color: lightgrey;
+  border-radius: calc(var(--size) * 0.1);
+}
+
+.stop_watch > .timer {
+  font-size: var(--size);
+  display: flex;
+  justify-content: center;
+}
+
+.stop_watch > .timer > div {
+  margin: calc(var(--size) * 0.2);
+}
+
+.stop_watch > .controls {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+  margin-inline: auto;
+  padding-bottom: calc(var(--size) * 0.2);
+}
+
+.stop_watch > .controls > button {
+  border: none;
+  --brightness: 50%;
+  color: black;
+  font-family: inherit;
+  font-size: calc(var(--size) * 0.2);
+  padding: calc(var(--size) * 0.1) calc(var(--size) * 0.2);
+  border-radius: calc(var(--size) * 0.1);
+}
+
+.stop_watch > .controls > :nth-child(1) {
+  background-color: hsl(145, 63%, 49%);
+}
+
+.stop_watch > .controls > :nth-child(2) {
+  background-color: hsl(8, 83%, 67%);
+}
+
+.stop_watch > .controls > :nth-child(3) {
+  background-color: hsl(308, 85%, 64%);
+}
+
+.stop_watch > .controls > button:hover {
+  color: white;
+  filter: brightness(66%);
+}
