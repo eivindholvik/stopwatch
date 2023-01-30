@@ -24,7 +24,6 @@ function updateTimer(argMs, argseconds, argminutes, reset = false) {
 const start = () => {
   if (runningState) return;
   runningState = true;
-  console.log("fuck");
   timerInterval = setInterval(() => {
     timer += 1 / hz;
 
