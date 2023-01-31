@@ -1,30 +1,32 @@
-const minutes = document.querySelector('.minutes');
-const seconds = document.querySelector('.seconds');
-const ms = document.querySelector('.ms');
-const laps = document.querySelector('.laps');
+const domMs = document.querySelector('.ms');
+const domSec = document.querySelector('.seconds');
+const domMin = document.querySelector('.minutes');
+const domLaps = document.querySelector('.laps');
+
 
 const btnStart = document.querySelector('.start');
 const btnStop = document.querySelector('.stop');
 const btnReset = document.querySelector('.reset');
 const btnLap = document.querySelector('.lap');
 
+const hz = 100;
+let myStopWatch;
 let timer = 0;
-const hz = 60;
-let timerInterval;
 let runningState = false;
 
-function updateTimer(argMs, argseconds, argminutes, reset = false) {
-  ms.textContent = argMs.toString().padEnd(4, "0");
-  seconds.textContent = argseconds.toString().padStart(2, "0");
-  minutes.textContent = argminutes.toString().padStart(2, "0");
+function updateTimer(argMs, argSeconds, argMinutes, reset = false) {
+  domMs.textContent = argMs.toString().padEnd(3, "0");
+  domSec.textContent = argSeconds.toString().padStart(2, "0");
+  domMin.textContent = argMinutes.toString().padStart(2, "0");
 
   if (reset) timer = 0;
 }
 
+
 const start = () => {
   if (runningState) return;
   runningState = true;
-  timerInterval = setInterval(() => {
+  myStopWatch = setInterval(() => {
     timer += 1 / hz;
 
     let msVal = Math.floor((timer - Math.floor(timer)) * 100);
@@ -38,31 +40,35 @@ const start = () => {
 
 const stop = () => {
   runningState = false;
-  clearInterval(timerInterval);
+  clearInterval(myStopWatch);
 }
 
-const lap = () => {
-  // laps.innerHTML += `hei`;
-  laps.innerHTML += `<li>${minutes.textContent} : ${seconds.textContent} : ${ms.textContent}</li>`;
-}
-
-btnStart.addEventListener("click", (e) => {
-  start();
-});
-
-btnStop.addEventListener("click", (e) => {
-  stop();
-});
-
-btnReset.addEventListener("click", (e) => {
+const reset = () => {
   if (runningState) {
     stop();
   } else {
-    updateTimer(0, 0, 0, true)
-    laps.innerHTML = "";
+    updateTimer(0, 0, 0, true);
   }
+};
+
+const addLap = () => {
+  domLaps.innerHTML += `<li class="lap">${domMin.textContent} : ${domSec.textContent} : ${domMs.textContent}</li>`;
+}
+
+btnStart.addEventListener("click", () => {
+  start();
+})
+
+btnStop.addEventListener("click", () => {
+  stop();
 });
 
-btnLap.addEventListener("click", (e) => {
-  lap();
+btnReset.addEventListener("click", () => {
+  reset();
+});
+
+btnLap.addEventListener("click", () => {
+  addLap();
 })
+
+
